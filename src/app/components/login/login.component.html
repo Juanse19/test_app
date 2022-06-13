@@ -1,0 +1,66 @@
+
+<!-- <app-mostrar-errores [errores]="errores"></app-mostrar-errores> -->
+<div class="container-login100" style="background-image: url('assets/images/background.jpg');">
+  <div class="login-page">
+    <div class="form">
+
+      <div class="animcon" id="animcon">
+        <img src="assets/images/logo.jpg"  alt="" srcset="">
+      </div>
+      <br>
+      <h4>Prueba técnica</h4>
+
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <div class="row">
+            <i id="email" class="material-icons">person</i>
+            <input formControlName="email" type="text" data-cy="login-email-field" placeholder="Email" correo required/>
+
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+            class="alert alert-danger">
+              <mat-error *ngIf="email?.errors?.['required']">El email es requerido</mat-error>
+              <mat-error *ngIf="!email?.errors?.['required']">Este no es un email valido</mat-error>
+            </div>
+
+         </div>
+
+        <div class="row">
+          <i id="pass" class="material-icons">lock</i>
+          <input formControlName="password" type="password" data-cy="login-password-field" placeholder="Contraseña" required/>
+
+          <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+          class="alert alert-danger">
+            <mat-error *ngIf="password?.errors?.['minlength']">Minimo 5 caracteres para la contraseña</mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.errors?.['required']">
+              La contraseña es requerido
+            </mat-error>
+          </div>
+
+      </div>
+
+      <div class="option_div">
+        <div class="check_box">
+          <input type="checkbox">
+          <span>Recordar</span>
+        </div>
+        <div class="forget_div">
+          <mat-slide-toggle formControlName="rememberMe" data-cy="login-switch-button" ngDefaultControl></mat-slide-toggle>
+        </div>
+      </div>
+
+
+      <div>
+        <button data-cy="login-submit-button">Acceder</button>
+      </div>
+
+      </form>
+    </div>
+
+    <footer>
+      <p class="btn-register" > Registrate </p>
+    </footer>
+
+  </div>
+  </div>
+
+
