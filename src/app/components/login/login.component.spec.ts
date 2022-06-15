@@ -84,6 +84,34 @@ describe('LoginComponent', () => {
     expect(getInnerText).toEqual('Acceder');
   });
 
+  it('El texto deberia de tener la palabra "Prueba técnica"',() => {
 
+    const elementRef = fixture.debugElement.query(By.css('h4'))
+    const getInnerText = elementRef.nativeElement.innerText
+    expect(getInnerText).toEqual('Prueba técnica');
+  });
+
+  it('Deberia de retornar invalido',() => {
+
+    const mockCredentials ={
+      email: 'test.test.com',
+      password: 'Test2',
+      rememberMe: true
+    }
+
+    const emailFom: any = component.loginForm.get('email')
+    const passwordFom: any = component.loginForm.get('password')
+    const rememberFom: any = component.loginForm.get('rememberMe')
+
+    emailFom.setValue(mockCredentials.email)
+    passwordFom.setValue(mockCredentials.password)
+    rememberFom.setValue(mockCredentials.rememberMe)
+
+    const btnElement = fixture.debugElement.query(By.css('button'))
+    btnElement.nativeElement.click()
+
+    expect(component.loginForm.invalid).toEqual(true);
+
+  });
 
 });
